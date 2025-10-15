@@ -2,9 +2,6 @@
 
 > RESTful Web API built with ASP.NET Core 8.0, featuring JWT authentication, Entity Framework Core, and comprehensive CORS configuration for cross-origin requests.
 
-**🌐 Client Applications:** See [Client](../Client/) or [Client_2](../Client_2/) folders  
-**📖 Complete Documentation:** See [HOW_TO_USE.md](../HOW_TO_USE.md)
-
 ---
 
 ## 📚 What's This API?
@@ -284,7 +281,6 @@ curl -X POST https://localhost:7147/api/Auth/login ^
 ```
 
 **Option 3: JavaScript Client**
-- See [Client_2](../Client_2/) for a full-featured web client
 - Any HTTP client (Postman, Insomnia, Thunder Client) can consume this API
 
 ---
