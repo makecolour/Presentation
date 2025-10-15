@@ -53,7 +53,7 @@ namespace Server
                 // More restrictive policy for production
                 options.AddPolicy("ProductionPolicy", policy =>
                 {
-                    policy.WithOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:5173")
+                    policy.WithOrigins("http://localhost:3001", "http://localhost:5173")
                           .AllowAnyMethod()
                           .AllowAnyHeader()
                           .AllowCredentials();
@@ -80,7 +80,7 @@ namespace Server
                     Contact = new OpenApiContact
                     {
                         Name = "FPT University - PRN232",
-                        Email = "demo@fpt.edu.vn"
+                        Email = "quyennthe180534@fpt.edu.vn"
                     }
                 });
 
