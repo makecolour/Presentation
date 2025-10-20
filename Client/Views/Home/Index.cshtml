@@ -1,0 +1,159 @@
+﻿@{
+    ViewData["Title"] = "PRN232 Demo - ASP.NET Client";
+}
+
+<!-- Welcome Section -->
+<div class="mb-8">
+  <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+    <div class="p-6 bg-white border-b border-gray-200">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome to PRN232 API Integration Demo</h1>
+      <p class="text-gray-600">ASP.NET MVC Client with Razor Views & Breeze-like UI</p>
+    </div>
+  </div>
+</div>
+
+<!-- Features Grid -->
+<div class="mb-8">
+  <h2 class="text-2xl font-semibold text-gray-900 mb-4"><i class="fas fa-book mr-2"></i>Demo Features</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Fetch API Card -->
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg breeze-card">
+      <div class="p-6">
+        <div class="flex items-center mb-3">
+          <i class="fas fa-code text-2xl text-indigo-600 mr-3"></i>
+          <h3 class="text-lg font-semibold text-gray-900">Fetch API Demo</h3>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Modern JavaScript Fetch API with async/await</p>
+        <a asp-controller="Home" asp-action="FetchDemo" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 breeze-btn">
+          <i class="fas fa-arrow-right mr-2"></i>Try It
+        </a>
+      </div>
+    </div>
+
+    <!-- Axios Card -->
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg breeze-card">
+      <div class="p-6">
+        <div class="flex items-center mb-3">
+          <i class="fas fa-rocket text-2xl text-green-600 mr-3"></i>
+          <h3 class="text-lg font-semibold text-gray-900">Axios Demo</h3>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Promise-based HTTP client for the browser</p>
+        <a asp-controller="Home" asp-action="AxiosDemo" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 breeze-btn">
+          <i class="fas fa-arrow-right mr-2"></i>Try It
+        </a>
+      </div>
+    </div>
+
+    <!-- AJAX Card -->
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg breeze-card">
+      <div class="p-6">
+        <div class="flex items-center mb-3">
+          <i class="fab fa-js text-2xl text-yellow-600 mr-3"></i>
+          <h3 class="text-lg font-semibold text-gray-900">AJAX Demo</h3>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Traditional jQuery AJAX requests</p>
+        <a asp-controller="Home" asp-action="AjaxDemo" class="inline-flex items-center px-4 py-2 bg-yellow-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-700 breeze-btn">
+          <i class="fas fa-arrow-right mr-2"></i>Try It
+        </a>
+      </div>
+    </div>
+
+    <!-- AngularJS Card -->
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg breeze-card">
+      <div class="p-6">
+        <div class="flex items-center mb-3">
+          <i class="fab fa-angular text-2xl text-red-600 mr-3"></i>
+          <h3 class="text-lg font-semibold text-gray-900">AngularJS Demo</h3>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">AngularJS $http service integration</p>
+        <a asp-controller="Home" asp-action="AngularDemo" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 breeze-btn">
+          <i class="fas fa-arrow-right mr-2"></i>Try It
+        </a>
+      </div>
+    </div>
+
+    <!-- Authentication Card -->
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg breeze-card">
+      <div class="p-6">
+        <div class="flex items-center mb-3">
+          <i class="fas fa-lock text-2xl text-purple-600 mr-3"></i>
+          <h3 class="text-lg font-semibold text-gray-900">Authentication</h3>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">JWT-based authentication with login/register</p>
+        <a asp-controller="Home" asp-action="AuthDemo" class="inline-flex items-center px-4 py-2 bg-purple-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-purple-700 breeze-btn">
+          <i class="fas fa-arrow-right mr-2"></i>Try It
+        </a>
+      </div>
+    </div>
+
+    <!-- Backend Call Card -->
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg breeze-card">
+      <div class="p-6">
+        <div class="flex items-center mb-3">
+          <i class="fas fa-server text-2xl text-blue-600 mr-3"></i>
+          <h3 class="text-lg font-semibold text-gray-900">Backend API Calls</h3>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Server-to-server API communication</p>
+        <a asp-controller="Home" asp-action="BackendCallDemo" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 breeze-btn">
+          <i class="fas fa-arrow-right mr-2"></i>Try It
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Learning Objectives -->
+<div class="mb-8">
+  <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+    <div class="p-6">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4"><i class="fas fa-bullseye mr-2"></i>Learning Objectives</h2>
+      <ul class="space-y-2 text-gray-700">
+        <li class="flex items-start">
+          <i class="fas fa-check text-indigo-600 mr-2 mt-1"></i>
+          <span>Different methods to call REST APIs from JavaScript</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check text-indigo-600 mr-2 mt-1"></i>
+          <span>JSON serialization and deserialization</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check text-indigo-600 mr-2 mt-1"></i>
+          <span>CORS configuration and handling</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check text-indigo-600 mr-2 mt-1"></i>
+          <span>JWT authentication and authorization</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check text-indigo-600 mr-2 mt-1"></i>
+          <span>Error handling and debugging techniques</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check text-indigo-600 mr-2 mt-1"></i>
+          <span>Middleware implementation in ASP.NET</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check text-indigo-600 mr-2 mt-1"></i>
+          <span>Entity Framework Core with SQL Server</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Start -->
+<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+  <div class="p-6">
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4"><i class="fas fa-rocket mr-2"></i>Quick Start</h2>
+    <ol class="space-y-2 text-gray-700 list-decimal list-inside">
+      <li class="font-medium">Navigate through the menu to explore different API call methods</li>
+      <li>Try the Authentication demo to register/login</li>
+      <li>Experiment with CRUD operations on Products</li>
+      <li>Check the browser console (F12) for detailed logs</li>
+      <li>
+        Review the API documentation at 
+        <a href="@ViewBag.ApiBaseUrl" target="_blank" class="text-indigo-600 hover:text-indigo-800 underline">@ViewBag.ApiBaseUrl</a>
+      </li>
+    </ol>
+  </div>
+</div>

@@ -1,0 +1,115 @@
+@{
+    ViewData["Title"] = "Authentication Demo";
+}
+
+<div class="space-y-6">
+  <div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900">Authentication Demo</h3>
+      <div class="mt-2 max-w-xl text-sm text-gray-500">
+        <p>This demo showcases JWT-based authentication. Register or login to receive a token, then use it to make authenticated requests.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Status -->
+  <div id="authStatus" class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Authentication Status</h3>
+      <div id="loggedOut" class="block">
+        <p class="text-red-600">❌ Not logged in</p>
+      </div>
+      <div id="loggedIn" class="hidden">
+        <p class="text-green-600">✅ Logged in as: <span id="currentUser" class="font-bold"></span></p>
+        <button id="logoutBtn" class="breeze-btn mt-2 inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Register Form -->
+    <div class="bg-white shadow sm:rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Register</h3>
+        <form id="registerForm" class="space-y-3">
+          <input id="regUsername" type="text" placeholder="Username" required class="form-input">
+          <input id="regEmail" type="email" placeholder="Email" required class="form-input">
+          <input id="regPassword" type="password" placeholder="Password" required class="form-input">
+          <input id="regFullName" type="text" placeholder="Full Name (optional)" class="form-input">
+          <button type="submit" class="breeze-btn w-full inline-flex justify-center items-center rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500">
+            <i class="fas fa-edit mr-2"></i> Register
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="bg-white shadow sm:rounded-lg">
+      <div class="px-4 py-5 sm:p-6">
+        <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Login</h3>
+        <form id="loginForm" class="space-y-3">
+          <input id="loginUsername" type="text" placeholder="Username" required class="form-input">
+          <input id="loginPassword" type="password" placeholder="Password" required class="form-input">
+          <button type="submit" class="breeze-btn w-full inline-flex justify-center items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
+            <i class="fas fa-unlock-alt mr-2"></i> Login
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Protected Actions -->
+  <div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Protected Actions (Requires Auth)</h3>
+      <div class="space-y-3">
+        <button id="createProductAuth" class="breeze-btn inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
+          <i class="fas fa-plus mr-2"></i> Create Sample Product
+        </button>
+        <button id="getProductsAuth" class="breeze-btn inline-flex items-center rounded-md bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500">
+          <i class="fas fa-list mr-2"></i> Get All Products (with auth header)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Results</h3>
+      
+      <!-- Status Messages -->
+      <div id="authLoading" class="hidden bg-blue-50 rounded-lg p-4 mb-4 flex items-center">
+        <div class="spinner mr-3"></div>
+        <span class="text-blue-700">Loading...</span>
+      </div>
+
+      <div id="authError" class="hidden bg-red-50 rounded-lg p-4 mb-4 text-red-700"></div>
+      <div id="authSuccess" class="hidden bg-green-50 rounded-lg p-4 mb-4 text-green-700"></div>
+
+      <pre id="authResults" class="results-box text-black"></pre>
+    </div>
+  </div>
+
+  <!-- Token Info -->
+  <div id="tokenInfo" class="bg-white shadow sm:rounded-lg hidden">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">JWT Token</h3>
+      <pre id="tokenDisplay" class="results-box text-xs text-black">No token</pre>
+    </div>
+  </div>
+  
+  <!-- Products Cards -->
+  <div id="authProductsContainer" class="hidden bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Products (<span id="authProductCount">0</span>)</h3>
+      <div id="authProductsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/auth-demo.js"></script>
+}

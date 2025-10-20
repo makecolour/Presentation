@@ -11,6 +11,11 @@
         "Path": "Client_2\\Client_2.esproj",
         "Action": "Start",
         "DebugTarget": "localhost (Edge)"
+      },
+      {
+        "Path": "Client\\Client.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
       }
     ]
   }

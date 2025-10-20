@@ -1,0 +1,129 @@
+@{
+    ViewData["Title"] = "Backend API Call Demo";
+}
+
+<div class="space-y-6">
+  <div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900">Backend API Call Demo</h3>
+      <div class="mt-2 max-w-xl text-sm text-gray-500">
+        <p>This demonstrates server-to-server API calls. The ASP.NET MVC backend calls the ASP.NET API, then returns the data to the frontend.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Call Flow Diagram -->
+  <div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Backend Call Flow</h3>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <div class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+          <p class="text-sm text-gray-700">Frontend (Browser) → ASP.NET MVC Backend</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex-shrink-0 w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+          <p class="text-sm text-gray-700">ASP.NET MVC Backend → ASP.NET API</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex-shrink-0 w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+          <p class="text-sm text-gray-700">ASP.NET API → SQL Server Database</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex-shrink-0 w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-sm">4</div>
+          <p class="text-sm text-gray-700">Response flows back through the chain</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Actions</h3>
+      <div class="space-y-3">
+        <a href="/Home/BackendCallDemo?action=get-all-products" class="breeze-btn inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
+          <i class="fas fa-list mr-2"></i> Get All Products (via Backend)
+        </a>
+        
+        <a href="/Home/BackendCallDemo?action=get-categories" class="breeze-btn inline-flex items-center rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-purple-500">
+          <i class="fas fa-folder mr-2"></i> Get Categories (via Backend)
+        </a>
+        
+        <form method="GET" action="/Home/BackendCallDemo" class="flex gap-2">
+          <input type="hidden" name="action" value="get-one-product">
+          <input type="number" name="productId" placeholder="Product ID" class="form-input flex-1" required>
+          <button type="submit" class="breeze-btn inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500">
+            <i class="fas fa-search mr-2"></i> Get One (via Backend)
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Use Cases -->
+  <div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4"><i class="fas fa-lightbulb mr-2"></i> Use Cases</h3>
+      <ul class="list-disc list-inside space-y-1 text-sm text-gray-700">
+        <li>Hide API keys/secrets</li>
+        <li>Server-side data processing</li>
+        <li>API rate limiting</li>
+        <li>Data aggregation from multiple sources</li>
+        <li>Caching layers</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Results -->
+  @if (ViewBag.Action != null)
+  {
+  <div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Results (JSON)</h3>
+      
+      <!-- Status Messages -->
+      @if (ViewBag.Error != null)
+      {
+      <div class="bg-red-50 rounded-lg p-4 mb-4 text-red-700">
+        <i class="fas fa-times-circle mr-2"></i>@ViewBag.Error
+      </div>
+      }
+      
+      @if (ViewBag.SuccessMessage != null)
+      {
+      <div class="bg-green-50 rounded-lg p-4 mb-4 text-green-700">
+        <i class="fas fa-check-circle mr-2"></i>@ViewBag.SuccessMessage
+      </div>
+      }
+
+      @if (ViewBag.Results != null)
+      {
+      <pre class="results-box text-black">@ViewBag.Results</pre>
+      }
+    </div>
+  </div>
+  }
+  
+  <!-- Products Cards -->
+  @if (ViewBag.Products != null && ((List<Client.Models.Product>)ViewBag.Products).Count > 0)
+  {
+  <div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Products (@((ViewBag.Products as List<Client.Models.Product>).Count))</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @foreach (var product in (List<Client.Models.Product>)ViewBag.Products)
+        {
+        <div class="breeze-card border rounded-lg p-4">
+          <h4 class="font-semibold text-lg">@product.Name</h4>
+          <p class="text-gray-600 text-sm">@(product.Description ?? "No description")</p>
+          <p class="text-indigo-600 font-bold mt-2">$@product.Price</p>
+          <p class="text-gray-500 text-sm">Stock: @product.StockQuantity</p>
+          <span class="inline-block mt-2 px-2 py-1 text-xs rounded bg-gray-200">@(product.Category ?? "N/A")</span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>

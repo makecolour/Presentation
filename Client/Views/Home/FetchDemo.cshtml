@@ -1,0 +1,118 @@
+@{
+    ViewData["Title"] = "Fetch API Demo";
+}
+
+<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+  <div class="p-6 bg-white border-b border-gray-200">
+    <h1 class="text-3xl font-bold text-indigo-600 mb-2">Fetch API Demo</h1>
+    <p class="text-gray-600">The Fetch API provides a modern interface for fetching resources. It uses Promises and is more powerful and flexible than XMLHttpRequest.</p>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <!-- Left Column - Controls -->
+  <div class="space-y-4">
+    <!-- Actions Card -->
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="p-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">Actions</h2>
+        <div class="space-y-3">
+          <button id="fetchAllProducts" class="w-full inline-flex justify-center items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest hover:bg-indigo-700 breeze-btn">
+            <i class="fas fa-list mr-2"></i> Get All Products
+          </button>
+          
+          <div class="flex gap-2">
+            <input id="productId" type="number" placeholder="Product ID" class="flex-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+            <button id="fetchOneProduct" class="inline-flex justify-center items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest hover:bg-green-700 breeze-btn">
+              <i class="fas fa-search mr-2"></i> Get One
+            </button>
+          </div>
+          
+          <div class="border-t pt-3 mt-3">
+            <h3 class="font-semibold text-gray-900 mb-2">Create New Product</h3>
+            <input id="newProductName" type="text" placeholder="Product Name" class="w-full mb-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+            <input id="newProductPrice" type="number" placeholder="Price" step="0.01" class="w-full mb-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+            <input id="newProductStock" type="number" placeholder="Stock Quantity" class="w-full mb-2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" />
+            <button id="createProduct" class="w-full inline-flex justify-center items-center px-4 py-2 bg-purple-600 border border-transparent rounded-md font-semibold text-sm text-white uppercase tracking-widest hover:bg-purple-700 breeze-btn">
+              <i class="fas fa-plus mr-2"></i> Create Product (Requires Auth)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Card -->
+    <div class="bg-yellow-50 overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="p-6">
+        <h3 class="font-semibold text-gray-900 mb-2"><i class="fas fa-lightbulb mr-2"></i> Key Features</h3>
+        <ul class="text-sm space-y-1 text-gray-700">
+          <li class="flex items-start"><i class="fas fa-check text-yellow-600 mr-2 mt-1"></i> Modern Promise-based API</li>
+          <li class="flex items-start"><i class="fas fa-check text-yellow-600 mr-2 mt-1"></i> Async/await syntax</li>
+          <li class="flex items-start"><i class="fas fa-check text-yellow-600 mr-2 mt-1"></i> Response streaming</li>
+          <li class="flex items-start"><i class="fas fa-check text-yellow-600 mr-2 mt-1"></i> Built into modern browsers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column - Results -->
+  <div class="space-y-4">
+    <!-- Status Messages -->
+    <div id="loading" class="hidden bg-blue-50 overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="p-4 flex items-center">
+        <div class="spinner mr-3"></div>
+        <span class="text-blue-700">Loading...</span>
+      </div>
+    </div>
+
+    <div id="errorMessage" class="hidden bg-red-50 overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="p-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <span class="text-red-400">❌</span>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-red-800">Error</h3>
+            <div id="errorText" class="mt-2 text-sm text-red-700"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="successMessage" class="hidden bg-green-50 overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="p-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <span class="text-green-400">✅</span>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-green-800">Success</h3>
+            <div id="successText" class="mt-2 text-sm text-green-700"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Display -->
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="p-6">
+        <h2 class="text-xl font-semibold text-gray-900 mb-4">Results (JSON)</h2>
+        <pre id="resultsContainer" class="results-box text-black">Click a button above to see results...</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Products Cards -->
+<div id="productsContainer" class="hidden mt-6">
+  <div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Products (<span id="productCount">0</span>)</h3>
+      <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+<script src="~/js/fetch-demo.js" asp-append-version="true"></script>
+}

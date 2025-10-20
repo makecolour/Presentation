@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "AngularJS Demo";
+}
+
+<div ng-app="productApp" ng-controller="ProductController" class="space-y-6">
+  <div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900">AngularJS Demo</h3>
+      <div class="mt-2 max-w-xl text-sm text-gray-500">
+        <p>AngularJS provides the $http service for making HTTP requests with powerful data binding capabilities.</p>
+      </div>
+      <div class="mt-5 space-y-4">
+        <button ng-click="getAllProducts()" class="breeze-btn inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500">
+          <i class="fas fa-list mr-2"></i> Get All Products
+        </button>
+        <button ng-click="getCategories()" class="breeze-btn inline-flex items-center rounded-md bg-pink-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-500">
+          <i class="fas fa-folder mr-2"></i> Get Categories
+        </button>
+        <div class="flex gap-2">
+          <input ng-model="selectedProductId" type="number" placeholder="Product ID" class="form-input flex-1">
+          <button ng-click="getOneProduct()" class="breeze-btn inline-flex items-center rounded-md bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500">
+            <i class="fas fa-search mr-2"></i> Get One
+          </button>
+        </div>
+        <div class="border-t pt-4">
+          <h4 class="font-medium text-gray-900 mb-2">Search Products</h4>
+          <input ng-model="searchText" type="text" placeholder="Search by name..." class="form-input">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Results</h3>
+      <div ng-show="loading" class="flex justify-center py-8">
+        <div class="spinner"></div>
+      </div>
+      <div ng-show="error" class="bg-red-50 rounded-lg p-4 mb-4 text-red-700">{{ errorMessage }}</div>
+      <div ng-show="success" class="bg-green-50 rounded-lg p-4 mb-4 text-green-700">{{ successMessage }}</div>
+      <pre class="results-box text-black">{{ products | json }}</pre>
+    </div>
+  </div>
+
+  <div ng-show="products.length > 0" class="bg-white shadow sm:rounded-lg">
+    <div class="px-4 py-5 sm:p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Products ({{ filteredProducts.length }})</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div ng-repeat="product in filteredProducts = (products | filter:searchText)" class="breeze-card border rounded-lg p-4">
+          <h4 class="font-semibold text-lg">{{ product.Name || product.name }}</h4>
+          <p class="text-gray-600 text-sm">{{ product.Description || product.description }}</p>
+          <p class="text-indigo-600 font-bold mt-2">${{ product.Price || product.price }}</p>
+          <p class="text-gray-500 text-sm">Stock: {{ product.StockQuantity || product.stockQuantity }}</p>
+          <span class="inline-block mt-2 px-2 py-1 text-xs rounded bg-gray-200">{{ product.Category || product.category }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/angular-demo.js"></script>
+}

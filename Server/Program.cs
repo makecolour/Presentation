@@ -53,7 +53,7 @@ namespace Server
                 // More restrictive policy for production
                 options.AddPolicy("ProductionPolicy", policy =>
                 {
-                    policy.WithOrigins("http://localhost:3001", "http://localhost:5173")
+                    policy.WithOrigins("http://localhost:5173", "")
                           .AllowAnyMethod()
                           .AllowAnyHeader()
                           .AllowCredentials();
